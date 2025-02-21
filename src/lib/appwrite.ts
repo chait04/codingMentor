@@ -1,8 +1,13 @@
-import { Account, Client, Databases } from 'appwrite';
+import { Account, Client, Databases, Storage } from 'appwrite';
+import { Models } from 'appwrite';
 
 const client = new Client()
-    .setEndpoint('YOUR_APPWRITE_ENDPOINT') // We'll update this later
-    .setProject('YOUR_PROJECT_ID'); // We'll update this later
+    .setEndpoint(import.meta.env.VITE_APPWRITE_ENDPOINT)
+    .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID);
 
 export const account = new Account(client);
 export const databases = new Databases(client);
+export const storage = new Storage(client);
+export const realtime = client.subscribe<Models.Document>([], () => {
+    // Handle realtime updates here
+});
