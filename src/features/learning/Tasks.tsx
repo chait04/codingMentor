@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Code, Video, Book, Clock, Trophy, CheckCircle2, Brain, ChevronRight } from 'lucide-react';
+import {  Clock, CheckCircle2} from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { defaultDailyGoals } from '../../data/dailyGoals';
