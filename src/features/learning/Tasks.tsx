@@ -1,58 +1,66 @@
-import { Code, Video, Book, Clock, Trophy, CheckCircle2, Brain } from 'lucide-react';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Code, Video, Book, Clock, Trophy, CheckCircle2, Brain, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { defaultDailyGoals } from '../../data/dailyGoals';
+import { codingChallenges } from '../../data/challenges';
+import { tutorials } from '../../data/tutorials';
 
-const activeTasks = [
-  {
-    id: 1,
-    type: 'challenge',
-    title: 'Array Manipulation Challenge',
-    description: 'Practice array methods with this coding exercise',
-    difficulty: 'medium',
-    estimatedTime: '30 mins',
-    progress: 0,
-    icon: Code,
-  },
-  {
-    id: 2,
-    type: 'video',
-    title: 'Understanding Recursion',
-    description: 'Learn the fundamentals of recursive programming',
-    difficulty: 'hard',
-    estimatedTime: '45 mins',
-    progress: 25,
-    icon: Video,
-  },
-  {
-    id: 3,
-    type: 'exercise',
-    title: 'JavaScript Promises',
-    description: 'Master asynchronous programming concepts',
-    difficulty: 'medium',
-    estimatedTime: '1 hour',
-    progress: 75,
-    icon: Book,
-  },
-];
+const getActiveTasks = () =>
+  defaultDailyGoals
+    .filter(goal => goal.status !== 'completed')
+    .map(goal => {
+      const linkedContent = goal.linkedContent;
+      let content;
+      
+      if (goal.type === 'challenge') {
+        content = codingChallenges.find(c => c.id === linkedContent);
+      } else if (goal.type === 'video') {
+        content = tutorials.find(t => t.id === linkedContent);
+      }
 
-const completedTasks = [
-  {
-    id: 4,
-    type: 'challenge',
-    title: 'String Manipulation',
-    description: 'Completed basic string operations challenge',
-    completedDate: '2024-02-20',
-    icon: Trophy,
-  },
-  {
-    id: 5,
-    type: 'exercise',
-    title: 'Basic Algorithms',
-    description: 'Finished fundamental algorithm exercises',
-    completedDate: '2024-02-19',
-    icon: Brain,
-  },
-];
+      return {
+        id: goal.id,
+        type: goal.type,
+        title: content?.title || goal.title,
+        description: content?.description || '',
+        difficulty: content?.difficulty || 'medium',
+        estimatedTime: content ? ('duration' in content ? content.duration : content.estimatedTime) || '30 mins' : '30 mins',
+        progress: goal.status === 'in-progress' ? 25 : 0,
+        icon: goal.icon,
+      };
+    });
+
+const getCompletedTasks = () =>
+  defaultDailyGoals
+    .filter(goal => goal.status === 'completed')
+    .map(goal => ({
+      id: goal.id,
+      type: goal.type,
+      title: goal.title,
+      description: 'Completed task',
+      completedDate: new Date().toISOString().split('T')[0],
+      icon: goal.icon,
+    }));
 
 export function Tasks() {
+  const navigate = useNavigate();
+  const [tasks] = useState({
+    active: getActiveTasks(),
+    completed: getCompletedTasks(),
+  });
+
+  const handleContinue = (task: { id: string; type: string; }) => {
+    const linkedContent = defaultDailyGoals.find(g => g.id === task.id)?.linkedContent;
+    
+    if (task.type === 'challenge' && linkedContent) {
+      navigate(`/challenge/${linkedContent}`);
+    } else if (task.type === 'video' && linkedContent) {
+      navigate(`/tutorial/${linkedContent}`);
+    }
+  };
+
+
   return (
     <div className="animate-fadeIn top-0">
       {/* Welcome Section */}
@@ -69,7 +77,7 @@ export function Tasks() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <h2 className="text-xl font-semibold text-gray-900">Active Tasks</h2>
             <div className="mt-4 space-y-4">
-              {activeTasks.map((task) => (
+              {tasks.active.map((task) => (
                 <div
                   key={task.id}
                   className="rounded-lg border border-gray-200 p-4 hover:border-mint-300 transition-colors"
@@ -101,7 +109,10 @@ export function Tasks() {
                         </div>
                       </div>
                     </div>
-                    <button className="rounded-lg bg-mint-600 px-4 py-2 text-sm font-medium text-white hover:bg-mint-700 transition-colors">
+                    <button 
+                      onClick={() => handleContinue(task)}
+                      className="rounded-lg bg-mint-600 px-4 py-2 text-sm font-medium text-white hover:bg-mint-700 transition-colors"
+                    >
                       Continue
                     </button>
                   </div>
@@ -131,7 +142,7 @@ export function Tasks() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <h2 className="text-xl font-semibold text-gray-900">Completed</h2>
             <div className="mt-4 space-y-4">
-              {completedTasks.map((task) => (
+              {tasks.completed.map((task) => (
                 <div
                   key={task.id}
                   className="flex items-start gap-4 rounded-lg bg-gray-50 p-4"
@@ -158,7 +169,7 @@ export function Tasks() {
             <h2 className="text-xl font-semibold text-gray-900">Today's Progress</h2>
             <div className="mt-4 grid grid-cols-2 gap-4">
               <div className="rounded-lg bg-white p-4 text-center">
-                <p className="text-2xl font-bold text-mint-600">3</p>
+                <p className="text-2xl font-bold text-mint-600">{tasks.completed.length}</p>
                 <p className="text-sm text-gray-600">Tasks Completed</p>
               </div>
               <div className="rounded-lg bg-white p-4 text-center">
@@ -172,3 +183,4 @@ export function Tasks() {
     </div>
   );
 }
+

@@ -13,6 +13,7 @@ import { Resources } from './features/learning/Resources';
 import { Profile } from './features/user/Profile';
 import { Settings } from './features/user/Settings';
 import { Notifications } from './features/notifications/Notifications';
+import { CustomerSupport } from './features/support/CustomerSupport';
 // import { Tasks } from './features/learning/Tasks';
 import { TaskCompletion } from './features/learning/TaskCompletion';
 import { Tasks } from './features/learning/Tasks';
@@ -96,6 +97,7 @@ function App() {
           <Route path="settings" element={<Settings />} />
           <Route path="notifications" element={<Notifications />} />
           <Route path="learningPath" element={<LearningPath />} />
+          <Route path="support" element={<CustomerSupport />} />
         </Route>
       </Routes>
     </div>

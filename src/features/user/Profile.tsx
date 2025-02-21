@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { User, Mail, Bell, Moon, Sun, Clock, Target } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import { useUser } from '@clerk/clerk-react';
 
 type NotificationFrequency = 'daily' | 'weekly' | 'monthly';
 type LearningGoal = 'interview' | 'skills' | 'language';
@@ -13,6 +14,7 @@ interface UserPreferences {
 }
 
 export function Profile() {
+  const { user } = useUser();
   const [preferences, setPreferences] = useState<UserPreferences>({
     darkMode: false,
     notifications: 'daily',
@@ -43,7 +45,7 @@ export function Profile() {
           <div className="mt-4 flex items-center gap-4">
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&auto=format&fit=crop&q=60"
+                src={user?.imageUrl || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&auto=format&fit=crop&q=60"}
                 alt="Profile"
                 className="h-20 w-20 rounded-full object-cover"
               />
@@ -58,7 +60,7 @@ export function Profile() {
                 </label>
                 <input
                   type="text"
-                  defaultValue="Alex Johnson"
+                  defaultValue={user?.fullName || "chai"}
                   className="mt-1 block w-full rounded-lg border border-gray-200 px-4 py-2"
                 />
               </div>
@@ -68,7 +70,7 @@ export function Profile() {
                 </label>
                 <div className="mt-1 flex items-center gap-2">
                   <Mail className="h-5 w-5 text-gray-400" />
-                  <span className="text-gray-600">alex.johnson@example.com</span>
+                  <span className="text-gray-600">{user?.primaryEmailAddress?.emailAddress || ""}</span>
                 </div>
               </div>
             </div>

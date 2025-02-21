@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom';
-import { Home, Settings, GraduationCap } from 'lucide-react';
+import { Home, Settings, GraduationCap, MessageSquare } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import { useState } from 'react';
 
 const navigation = [
   { name: 'Home', icon: Home, href: '/dashboard' },
   { name: 'Learning Path', icon: GraduationCap, href: '/dashboard/learningPath' },
+  { name: 'Customer Support', icon: MessageSquare, href: '/dashboard/support' },
   { name: 'Settings', icon: Settings, href: '/dashboard/settings' },
 ];
 
