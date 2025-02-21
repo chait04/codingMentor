@@ -10,9 +10,11 @@ import {
   CheckCircle2,
   BrainCircuit
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export function DashboardHome() {
   const { user } = useUser();
+  const navigate = useNavigate();
 
   return (
     <div className="animate-fadeIn py-3 px-5 top-0">
@@ -65,7 +67,10 @@ export function DashboardHome() {
                 </div>
               ))}
             </div>
-            <button className="mt-4 w-full py-2 px-4 bg-mint-600 text-white rounded-lg hover:bg-mint-700 transition-colors flex items-center justify-center gap-2">
+            <button 
+              onClick={() => navigate('/dashboard/tasks')} 
+              className="mt-4 w-full py-2 px-4 bg-mint-600 text-white rounded-lg hover:bg-mint-700 transition-colors flex items-center justify-center gap-2"
+            >
               Continue Learning
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -156,7 +161,10 @@ export function DashboardHome() {
               <p className="text-sm text-gray-600 mb-3">
                 Practice your array skills with this medium-level challenge.
               </p>
-              <button className="w-full py-2 px-4 bg-mint-600 text-white rounded-lg hover:bg-mint-700 transition-colors text-sm">
+              <button 
+                onClick={() => navigate('/dashboard/practice/array-manipulation')} 
+                className="w-full py-2 px-4 bg-mint-600 text-white rounded-lg hover:bg-mint-700 transition-colors text-sm"
+              >
                 Start Challenge
               </button>
             </div>

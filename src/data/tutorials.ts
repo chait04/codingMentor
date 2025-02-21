@@ -1,4 +1,4 @@
-import { Video, Code, BookOpen } from 'lucide-react';
+import { Video } from 'lucide-react';
 
 export type Tutorial = {
   id: string;
@@ -31,29 +31,16 @@ export const tutorials: Tutorial[] = [
     icon: Video,
   },
   {
-    id: 'py-tut-001',
-    title: 'Python List Comprehension',
-    description: 'Learn how to write elegant and efficient list comprehensions in Python.',
-    duration: '30 mins',
-    language: 'python',
-    category: 'lists',
+    id: 'js-tut-003',
+    title: 'Advanced Array Operations in JavaScript',
+    description: 'Learn advanced array operations including sorting, searching, and transforming arrays.',
+    duration: '40 mins',
+    language: 'javascript',
+    category: 'arrays',
     difficulty: 'intermediate',
     videoUrl: 'https://www.youtube.com/embed/GBIIQ0kP15E',
-    instructor: 'Sarah Johnson',
-    tags: ['python', 'lists', 'comprehension'],
-    icon: Code,
-  },
-  {
-    id: 'js-tut-002',
-    title: 'Asynchronous JavaScript',
-    description: 'Understanding Promises, async/await, and handling asynchronous operations.',
-    duration: '60 mins',
-    language: 'javascript',
-    category: 'async',
-    difficulty: 'advanced',
-    videoUrl: 'https://www.youtube.com/embed/GBIIQ0kP15E',
-    instructor: 'Mike Brown',
-    tags: ['javascript', 'async', 'promises'],
-    icon: BookOpen,
-  },
+    instructor: 'John Smith',
+    tags: ['javascript', 'arrays', 'algorithms'],
+    icon: Video,
+  }
 ];

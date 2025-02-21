@@ -54,9 +54,9 @@ export function Tasks() {
     const linkedContent = defaultDailyGoals.find(g => g.id === task.id)?.linkedContent;
     
     if (task.type === 'challenge' && linkedContent) {
-      navigate(`/challenge/${linkedContent}`);
+      navigate(`/dashboard/practice/${linkedContent}`);
     } else if (task.type === 'video' && linkedContent) {
-      navigate(`/tutorial/${linkedContent}`);
+      navigate(`/dashboard/practice/${linkedContent}`);
     }
   };
 

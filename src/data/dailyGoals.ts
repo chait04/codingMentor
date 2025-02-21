@@ -1,4 +1,4 @@
-import { Code, Video, Book } from 'lucide-react';
+import { Code, Video } from 'lucide-react';
 
 export type DailyGoal = {
   id: string;
@@ -23,32 +23,51 @@ export type DailyProgress = {
 export const defaultDailyGoals: DailyGoal[] = [
   {
     id: 'goal-1',
-    title: 'Complete "Array Manipulation" lesson',
-    type: 'challenge',
-    status: 'completed',
-    points: 10,
-    icon: Code,
-    linkedContent: 'js-001',
-  },
-  {
-    id: 'goal-2',
-    title: 'Watch JavaScript Arrays Tutorial',
+    title: 'Master Array Methods',
     type: 'video',
-    status: 'in-progress',
-    points: 5,
+    status: 'pending',
+    points: 10,
     icon: Video,
     linkedContent: 'js-tut-001',
   },
   {
-    id: 'goal-3',
-    title: 'Practice String Manipulation',
-    type: 'exercise',
+    id: 'goal-2',
+    title: 'Array Sum Challenge',
+    type: 'challenge',
     status: 'pending',
     points: 15,
-    icon: Book,
-    linkedContent: 'py-001',
+    icon: Code,
+    linkedContent: 'js-001',
+  },
+  {
+    id: 'goal-3',
+    title: 'Array Filter Practice',
+    type: 'challenge',
+    status: 'pending',
+    points: 15,
+    icon: Code,
+    linkedContent: 'js-003',
+  },
+  {
+    id: 'goal-4',
+    title: 'Advanced Array Operations',
+    type: 'video',
+    status: 'pending',
+    points: 10,
+    icon: Video,
+    linkedContent: 'js-tut-003',
+  },
+  {
+    id: 'goal-5',
+    title: 'Array Sorting Exercise',
+    type: 'challenge',
+    status: 'pending',
+    points: 15,
+    icon: Code,
+    linkedContent: 'js-004',
   },
 ];
+
 
 export const userProgress: Record<string, DailyProgress> = {
   '2024-02-21': {

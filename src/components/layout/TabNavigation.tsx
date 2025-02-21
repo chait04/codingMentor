@@ -5,7 +5,7 @@ export function TabNavigation() {
   const tabs = [
     { name: 'Home', path: '/dashboard', exact: true },
     { name: 'Tasks', path: '/dashboard/tasks' },
-    { name: 'TaskCompletion', path: '/dashboard/completion' },
+    { name: 'TaskCompletion', path: '/dashboard/task-completion' },
     { name: 'Progress', path: '/dashboard/progress' },
     { name: 'Resources', path: '/dashboard/resources' },
   ];

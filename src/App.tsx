@@ -14,9 +14,9 @@ import { Profile } from './features/user/Profile';
 import { Settings } from './features/user/Settings';
 import { Notifications } from './features/notifications/Notifications';
 import { CustomerSupport } from './features/support/CustomerSupport';
-// import { Tasks } from './features/learning/Tasks';
 import { TaskCompletion } from './features/learning/TaskCompletion';
 import { Tasks } from './features/learning/Tasks';
+import { Practice } from './pages/dashboard/Practice';
 
 function App() {
   const { isLoaded, isSignedIn } = useAuth();
@@ -45,7 +45,6 @@ function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         
-        {/* Onboarding Routes */}
         <Route
           path="/onboarding"
           element={
@@ -91,8 +90,9 @@ function App() {
           <Route index element={<DashboardHome/>}/>
           <Route path="progress" element={<Progress />} />
           <Route path="resources" element={<Resources />} />
-          <Route path="tasks" element={<TaskCompletion />} /> // names are ppretty bad confusing but its just for now
-          <Route path="completion" element={<Tasks />} /> // these are used in TabNavigation dont worry about the name
+          <Route path="tasks" element={<Tasks />} />
+          <Route path="task-completion" element={<TaskCompletion />} />
+          <Route path="practice/:id" element={<Practice />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<Settings />} />
           <Route path="notifications" element={<Notifications />} />
